@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import items from "../components/items";
 
 function Display() {
-  let [card, setCard] = useState(items);
-  let [reload, setReload] = useState(false);
-  let [isEmpty, setEmpty] = useState(false);
-  let [showmore, setShowmore] = useState([]);
+  const [card, setCard] = useState(items);
+  const [reload, setReload] = useState(false);
+  const [isEmpty, setEmpty] = useState(false);
+  const [showmore, setShowmore] = useState([]);
 
   function handleShowmore(index) {
     const updatedShowmore = [...showmore];
-    updatedShowmore[index] = !showmore[index];
+    updatedShowmore[index] = !updatedShowmore[index]; // Toggle the value
     setShowmore(updatedShowmore);
   }
 
@@ -39,21 +39,29 @@ function Display() {
         <p>Loading...</p>
       ) : !isEmpty ? (
         card.map((item, index) => {
-            const isExpanded = showmore[index];
-          const displayInfo = isExpanded ? item.info : item.info.substring(0, 200);
+          const isExpanded = showmore[index];
+          const displayInfo = isExpanded
+            ? item.info // Show full info if expanded
+            : item.info.substring(0, 200); // Show first 200 characters
 
           return (
-            <div id="tour-item-para-rec6d6T3q5EBIdCfD" key={index} className="single-tour">
+            <div
+              id="tour-item-para-rec6d6T3q5EBIdCfD"
+              key={index}
+              className="single-tour"
+            >
               <img src={item.image} alt={item.name} />
               <p>{item.name}</p>
-              <p className="tour-info">{displayInfo}{!isExpanded && item.info.length > 200 ? "..." : ""}</p>
-
-
+              <p className="tour-info">
+                {displayInfo}
+                {!isExpanded && item.info.length > 200 ? "..." : ""}
+              </p>
               <p className="tour-price">{item.price}</p>
-
-
-
-              <button id="delete-btn-rec6d6T3q5EBIdCfD" onClick={() => handleDelete(index)} className="delete-btn">
+              <button
+                id="delete-btn-rec6d6T3q5EBIdCfD"
+                onClick={() => handleDelete(index)}
+                className="delete-btn"
+              >
                 Delete
               </button>
               <button
@@ -61,7 +69,7 @@ function Display() {
                 className="show-more"
                 id="see-more-rec6d6T3q5EBIdCfD"
               >
-                {showmore[index] ? "See less" : "Show more"}
+                {isExpanded ? "See less" : "Show more"}
               </button>
             </div>
           );
