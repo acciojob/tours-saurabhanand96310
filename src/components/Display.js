@@ -31,36 +31,52 @@ function Display() {
 
   return (
     <div className="tour-list">
-    <h1 className="title">Tours</h1>
-    {card.length > 0 ? (
-      card.map((item, index) => {
-        const isExpanded = showmore[index];
-        const displayInfo = isExpanded ? item.info : item.info.substring(0, 200);
-
-        return (
-          <div key={index} className="single-tour">
-            <img src={item.image} alt={item.name} />
-            <p>{item.name}</p>
-            <p className="tour-info">{displayInfo}{!isExpanded && item.info.length > 200 ? "..." : ""}</p>
-            <p className="tour-price">{item.price}</p>
-            <button
-              onClick={() => handleDelete(index)}
-              className="delete-btn"
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => handleShowmore(index)}
-              className="show-more"
-            >
-              {isExpanded ? "See less" : "Show more"}
-            </button>
-          </div>
-        );
-      })
-    ) : (
-      <p>No more tours</p>
-    )}
+      <h1 className="title">Tours</h1>
+      <button onClick={handleRefresh} className="btn">
+        Refresh
+      </button>
+      {reload ? (
+        <p>Loading...</p>
+      ) : !isEmpty ? (
+        // card.map((item, index) => {
+        //   return (
+        //     <div id="tour-item-para-rec6d6T3q5EBIdCfD" key={index} className="single-tour">
+        //       <img src={item.image} alt={item.name} />
+        //       <p>{item.name}</p>
+        //       <p className="tour-info">{showmore[index] ? null : item.info}</p>
+        //       <p className="tour-price">${item.price}</p>
+        //       <button id="delete-btn-rec6d6T3q5EBIdCfD" onClick={() => handleDelete(index)} className="delete-btn">
+        //         Delete
+        //       </button>
+        
+            card.map((item, index) => {
+              const isExpanded = showmore[index];
+              const displayInfo = isExpanded ? item.info : item.info.substring(0, 200);
+    
+              return (
+                <div key={index} className="single-tour">
+                  <img src={item.image} alt={item.name} />
+                  <p>{item.name}</p>
+                  <p className="tour-info">{displayInfo}{!isExpanded && item.info.length > 200 ? "..." : ""}</p>
+                  <p className="tour-price">{item.price}</p>
+                  <button
+                    onClick={() => handleDelete(index)}
+                    className="delete-btn"
+                  >
+                    Delete
+                  </button>
+              <button
+                onClick={() => handleShowmore(index)}
+                className="show-more"
+              >
+                {showmore[index] ? "See more" : "Show less"}
+              </button>
+            </div>
+          );
+        })
+      ) : (
+        <p>No more tours</p>
+      )}
     </div>
   );
 }
