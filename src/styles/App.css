@@ -10,3 +10,15 @@ button{
     justify-content: center;
     align-items: center;
 }
+.single-tour{
+    background-color: lightblue;
+    padding: 15px;
+}
+.tour-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.show-more,.btn{
+    width: 25%;
+}
