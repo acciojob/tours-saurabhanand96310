@@ -40,7 +40,7 @@ function Display() {
       ) : !isEmpty ? (
         card.map((item, index) => {
             const isExpanded = showmore[index];
-          const displayInfo = isExpanded ? item.info : item.info.substring(0, 200);
+          const displayInfo = isExpanded ? item.info : item.info.substring(0, 199);
 
           return (
             <div id="tour-item-para-rec6d6T3q5EBIdCfD" key={index} className="single-tour">
